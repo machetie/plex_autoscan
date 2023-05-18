@@ -167,7 +167,7 @@ def scan(config, lock, path, scan_for, section, scan_type, resleep_paths, scan_t
                 logger.info("Plex is available for media scanning - (Server Account: '%s')", plex_account_user)
 
         # begin scan
-         logger.info("Running Plex Media Scanner for: %s", scan_path)
+        logger.info("Running Plex Media Scanner for: %s", scan_path)
          logger.debug(final_cmd)
          resp = requests.get('%s/library/sections/%s/refresh?path=%s&X-Plex-Token=%s' % (
          config['PLEX_LOCAL_URL'], str(section), scan_path, config['PLEX_TOKEN']), timeout=30)
