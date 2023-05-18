@@ -168,15 +168,18 @@ def scan(config, lock, path, scan_for, section, scan_type, resleep_paths, scan_t
 
         # begin scan
         logger.info("Running Plex Media Scanner for: %s", scan_path)
-         logger.debug(final_cmd)
-         resp = requests.get('%s/library/sections/%s/refresh?path=%s&X-Plex-Token=%s' % (
-         config['PLEX_LOCAL_URL'], str(section), scan_path, config['PLEX_TOKEN']), timeout=30)
-          if resp.status_code == 200: 
-              logger.info("Web Scan request was successful.")
-          else:
-        		logger.error("Web Request responded with an error!")
-          logger.info("Finished scan!")
-
+        logger.debug(final_cmd)
+        resp = requests.get(
+            '%s/library/sections/%s/refresh?path=%s&X-Plex-Token=%s' % (
+                config['PLEX_LOCAL_URL'], str(section), scan_path, config['PLEX_TOKEN']
+            ),
+            timeout=30
+        )
+        if resp.status_code == 200:
+            logger.info("Web Scan request was successful.")
+        else:
+            logger.error("Web Request responded with an error!")
+        logger.info("Finished scan!")
 
         # remove item from Plex database if sqlite is enabled
         if config['SERVER_USE_SQLITE']:
